@@ -1,0 +1,12 @@
+.questionSection{  
+  border: 5px solid rgb(0, 140, 255);
+  height: 150px;
+  width: 30%;
+  margin: auto;
+}
+
+.questionSection .question,.answer{
+  padding-bottom: 15px;
+}
+
+
