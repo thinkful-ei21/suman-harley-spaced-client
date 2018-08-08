@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
-import {fetchProtectedData} from '../actions/protected-data';
+import {fetchQuestion} from '../actions/protected-data';
 import Question from './Question';
 import './dashboard.css';
 
@@ -15,7 +15,7 @@ export class Dashboard extends React.Component {
     }
     
     componentDidMount() {
-        this.props.dispatch(fetchProtectedData());
+        this.props.dispatch(fetchQuestion());
     }
 
     startGame(){
@@ -23,6 +23,7 @@ export class Dashboard extends React.Component {
             playing: true,
             showStartButton: false
         });
+        this.props.dispatch(fetchQuestion());
     }
     
     render() {

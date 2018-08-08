@@ -5,8 +5,16 @@ import './Question.css';
 
 export class Question extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      submit : false
+    }
+  }
   submit(){
-    
+    this.setState({
+      submit: true
+    })
   }
 
   render(){
@@ -28,9 +36,9 @@ const mapStateToProps = state => {
   const {currentUser} = state.auth;
   return {
       username: state.auth.currentUser.username,
-      question: state.auth.currentUser.question,
-      attempts: state.auth.currentUser.attempts,
-      correct: state.auth.currentUser.correct
+      question: state.protectedData.data.question,
+      attempts: state.protectedData.data.attempts,
+      correct: state.protectedData.data.correct
   };
 };
 

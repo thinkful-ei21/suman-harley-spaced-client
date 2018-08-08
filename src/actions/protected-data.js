@@ -1,21 +1,21 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
-export const FETCH_PROTECTED_DATA_SUCCESS = 'FETCH_PROTECTED_DATA_SUCCESS';
-export const fetchProtectedDataSuccess = data => ({
-    type: FETCH_PROTECTED_DATA_SUCCESS,
+export const FETCH_QUESTION_SUCCESS = 'FETCH_QUESTION_SUCCESS';
+export const fetchQuestionSuccess = data => ({
+    type: FETCH_QUESTION_SUCCESS,
     data
 });
 
-export const FETCH_PROTECTED_DATA_ERROR = 'FETCH_PROTECTED_DATA_ERROR';
-export const fetchProtectedDataError = error => ({
-    type: FETCH_PROTECTED_DATA_ERROR,
+export const FETCH_QUESTION_ERROR = 'FETCH_QUESTION_ERROR';
+export const fetchQuestionError = error => ({
+    type: FETCH_QUESTION_ERROR,
     error
 });
 
-export const fetchProtectedData = () => (dispatch, getState) => {
+export const fetchQuestion = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/users`, {
+    return fetch(`${API_BASE_URL}/questions`, {
         method: 'GET',
         headers: {
             // Provide our auth token as credentials
@@ -26,10 +26,10 @@ export const fetchProtectedData = () => (dispatch, getState) => {
         .then(res => res.json())
         .then((data) => {
             console.log(data);
-            const result = data.data;
-            dispatch(fetchProtectedDataSuccess(result));
+            const result = data;
+            dispatch(fetchQuestionSuccess(result));
         })
         .catch(err => {
-            dispatch(fetchProtectedDataError(err));
+            dispatch(fetchQuestionError(err));
         });
 };
