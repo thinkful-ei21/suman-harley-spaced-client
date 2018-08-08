@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import requiresLogin from './requires-login';
+import {fetchQuestion,fetchResult} from '../actions/protected-data';
 import './Question.css';
 
 export class Question extends React.Component {
@@ -8,27 +9,55 @@ export class Question extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      submit : false
+      submit : true,
+      next: false,
+      userInput: ''
     }
   }
   submit(){
     this.setState({
-      submit: true
-    })
+      submit: false,
+      next: true
+    });    
+    this.props.dispatch(fetchResult(this.state.userInput));
+  }
+
+  next(){
+    this.setState({
+      submit: true,
+      next: false
+    });
+    this.props.dispatch(fetchQuestion());
+  }
+
+  displayQuestion(){
+    return  <div>  
+              <div>
+                  Attempts: {this.props.attempts}  Correct: {this.props.correct}
+              </div>
+                <div className="question">
+                    Question: What's the HINDI Word for " {this.props.question} " ?
+                </div>      
+                <div className="answer">
+                  Your Answer: <input type="text" onChange={e => this.setState({ userInput: e.target.value})}></input>
+                </div> 
+                <button onClick={() => this.submit()}>SUBMIT</button>
+            </div>;
+  }
+
+  displayResult(){
+    return <div>
+              Your Answer was {this.props.result ? 'Correct' : 'Wrong'}
+              <br/>             
+              <button onClick={() => this.next()}>NEXT</button>
+              <br/>
+              {this.props.result ? '' : `The Correct answer is ${this.props.answer}`}
+          </div>
   }
 
   render(){
-    return <div className="questionSection">
-      <div>
-        Attempts: {this.props.attempts}  Correct: {this.props.correct}
-      </div>
-      <div className="question">
-          Question: What's the HINDI Word for " {this.props.question} " ?
-      </div>      
-      <div className="answer">
-        Your Answer: <input type="text"></input>
-      </div> 
-      <button onClick={() => this.submit()}>SUBMIT</button>    
+    return <div className="questionSection">      
+        {this.state.submit ?  this.displayQuestion() : this.displayResult()}    
     </div>; 
   }
 }
@@ -38,7 +67,9 @@ const mapStateToProps = state => {
       username: state.auth.currentUser.username,
       question: state.protectedData.data.question,
       attempts: state.protectedData.data.attempts,
-      correct: state.protectedData.data.correct
+      correct: state.protectedData.data.correct,
+      answer: state.protectedData.data.answer,
+      result: state.protectedData.data.result
   };
 };
 

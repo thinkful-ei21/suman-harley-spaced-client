@@ -13,6 +13,18 @@ export const fetchQuestionError = error => ({
     error
 });
 
+export const FETCH_RESULT_SUCCESS = 'FETCH_RESULT_SUCCESS';
+export const fetchResultSuccess = data => ({
+    type: FETCH_RESULT_SUCCESS,
+    data
+});
+
+export const FETCH_RESULT_ERROR = 'FETCH_RESULT_ERROR';
+export const fetchResultError = error => ({
+    type: FETCH_RESULT_ERROR,
+    error
+});
+
 export const fetchQuestion = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
     return fetch(`${API_BASE_URL}/questions`, {
@@ -31,5 +43,30 @@ export const fetchQuestion = () => (dispatch, getState) => {
         })
         .catch(err => {
             dispatch(fetchQuestionError(err));
+        });
+};
+
+
+export const fetchResult = (userAnswer) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    console.log(userAnswer);
+    return fetch(`${API_BASE_URL}/questions`, {
+        method: 'PUT',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`,
+            "Content-Type": "application/json"
+        },
+        body:JSON.stringify({answer: userAnswer})
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((data) => {
+            console.log(data);
+            const result = data;
+            dispatch(fetchResultSuccess(result));
+        })
+        .catch(err => {
+            dispatch(fetchResultError(err));
         });
 };
