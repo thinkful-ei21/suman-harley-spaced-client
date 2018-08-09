@@ -5,3 +5,21 @@
 .dashboard .start{
   padding-bottom: 5%;
 }
+
+.dashboard{
+  position: relative;
+  display: block;
+}
+
+.dashboard::after{
+  content: "";
+  background-image: url(background.jpg);  
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+

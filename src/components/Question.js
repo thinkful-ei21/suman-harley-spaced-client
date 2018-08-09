@@ -49,9 +49,8 @@ export class Question extends React.Component {
     return <div>
               Your Answer was {this.props.result ? 'Correct' : 'Wrong'}
               <br/>             
+              {this.props.result ? '' : `The Correct answer is ${this.props.answer}`}<br/>
               <button onClick={() => this.next()}>NEXT</button>
-              <br/>
-              {this.props.result ? '' : `The Correct answer is ${this.props.answer}`}
           </div>
   }
 

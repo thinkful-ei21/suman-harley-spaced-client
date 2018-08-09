@@ -36,8 +36,7 @@ export const fetchQuestion = () => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => {
-            console.log(data);
+        .then((data) => {            
             const result = data;
             dispatch(fetchQuestionSuccess(result));
         })
@@ -48,8 +47,7 @@ export const fetchQuestion = () => (dispatch, getState) => {
 
 
 export const fetchResult = (userAnswer) => (dispatch, getState) => {
-    const authToken = getState().auth.authToken;
-    console.log(userAnswer);
+    const authToken = getState().auth.authToken;    
     return fetch(`${API_BASE_URL}/questions`, {
         method: 'PUT',
         headers: {
@@ -61,8 +59,7 @@ export const fetchResult = (userAnswer) => (dispatch, getState) => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((data) => {
-            console.log(data);
+        .then((data) => {            
             const result = data;
             dispatch(fetchResultSuccess(result));
         })

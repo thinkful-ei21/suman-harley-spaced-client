@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
 
+import History from './History';
 import LoginForm from './login-form';
 import './landing-page.css';
 
@@ -16,6 +17,7 @@ export function LandingPage(props) {
             <h2>Login</h2>
             <LoginForm />
             <Link to="/register">Register</Link>
+            <History />
         </div>
     );
 }

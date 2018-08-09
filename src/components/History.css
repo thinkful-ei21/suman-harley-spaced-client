@@ -1,0 +1,22 @@
+.History .About{
+  border: 1px solid salmon;  
+  padding: 5%;
+  margin: 5%;
+  background: sandybrown;
+}
+
+.History{
+  display: inline;
+}
+.History .languageFamily,.earlyForms{
+  border: 1px solid salmon;   
+  background-color: azure; 
+  width: 20%; 
+  height: auto;
+  display: inline-block;   
+}
+
+ul{
+  list-style-type: none;
+  text-align: center;
+}
