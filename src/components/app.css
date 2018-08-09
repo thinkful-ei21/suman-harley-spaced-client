@@ -6,6 +6,10 @@
   z-index: 2;
 }
 
+#root{
+  background-color: lavender;
+}
+
 .img{
   background-image: url("background.jpg");
   opacity: 0.5;    

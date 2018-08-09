@@ -30,7 +30,7 @@ export class Dashboard extends React.Component {
         return (
             <div className="dashboard">
                 <div className="dashboardUsername">
-                    Welcome  {this.props.username.toUpperCase()}
+                    Welcome,  {this.props.username[0].toUpperCase() + this.props.username.slice(1)}!!
                 </div>              
                 {this.state.showStartButton ? <div className="start">
                     <button onClick={() => this.startGame()}>START</button>

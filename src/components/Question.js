@@ -36,7 +36,7 @@ export class Question extends React.Component {
                   Attempts: {this.props.attempts}  Correct: {this.props.correct}
               </div>
                 <div className="question">
-                    Question: What's the HINDI Word for " {this.props.question} " ?
+                    Question: What's the HINDI Word for "{this.props.question}?" 
                 </div>      
                 <div className="answer">
                   Your Answer: <input type="text" onChange={e => this.setState({ userInput: e.target.value})}></input>
