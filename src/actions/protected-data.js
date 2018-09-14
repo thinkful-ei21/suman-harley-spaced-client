@@ -1,6 +1,11 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
+export const FETCH_REQUEST = 'FETCH_REQUEST';
+export const fetchRequest = () => ({
+    type: FETCH_REQUEST
+});
+
 export const FETCH_QUESTION_SUCCESS = 'FETCH_QUESTION_SUCCESS';
 export const fetchQuestionSuccess = data => ({
     type: FETCH_QUESTION_SUCCESS,
@@ -27,6 +32,7 @@ export const fetchResultError = error => ({
 
 export const fetchQuestion = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
+    dispatch(fetchRequest());
     return fetch(`${API_BASE_URL}/questions`, {
         method: 'GET',
         headers: {
@@ -47,7 +53,8 @@ export const fetchQuestion = () => (dispatch, getState) => {
 
 
 export const fetchResult = (userAnswer) => (dispatch, getState) => {
-    const authToken = getState().auth.authToken;    
+    const authToken = getState().auth.authToken;
+    dispatch(fetchRequest());    
     return fetch(`${API_BASE_URL}/questions`, {
         method: 'PUT',
         headers: {

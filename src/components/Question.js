@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Spinner from 'react-spinkit';
 import requiresLogin from './requires-login';
 import {fetchQuestion,fetchResult} from '../actions/protected-data';
 import './Question.css';
@@ -31,6 +32,10 @@ export class Question extends React.Component {
   }
 
   displayQuestion(){
+    if (this.props.loading) {
+      return <Spinner spinnername="circle" fadeIn="none" />;
+    }
+
     return  <div>  
               <div>
                   Attempts: {this.props.attempts}  Correct: {this.props.correct}
@@ -46,6 +51,10 @@ export class Question extends React.Component {
   }
 
   displayResult(){
+    if (this.props.loading) {
+      return <Spinner spinnername="circle" fadeIn="none" />;
+    }
+
     return <div>
               Your Answer was {this.props.result ? 'Correct' : 'Wrong'}
               <br/>             
@@ -68,7 +77,8 @@ const mapStateToProps = state => {
       attempts: state.protectedData.data.attempts,
       correct: state.protectedData.data.correct,
       answer: state.protectedData.data.answer,
-      result: state.protectedData.data.result
+      result: state.protectedData.data.result,
+      loading: state.protectedData.loading
   };
 };
 
