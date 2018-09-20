@@ -9,6 +9,8 @@
 .dashboard{
   position: relative;
   display: block;
+  widows: 100%;
+  height: auto;
 }
 
 .dashboard::after{

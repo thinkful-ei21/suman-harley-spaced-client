@@ -5,9 +5,6 @@
   background: sandybrown;
 }
 
-.History{
-  display: inline;
-}
 .History .languageFamily,.earlyForms{
   border: 1px solid salmon;   
   background-color: azure; 
@@ -15,6 +12,7 @@
   height: auto;
   display: inline-block;   
 }
+
 
 ul{
   list-style-type: none;
